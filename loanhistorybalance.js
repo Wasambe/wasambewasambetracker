@@ -84,6 +84,7 @@ return;
 	searchNameFoundYesNo="No";
 	checkusername();
 	checkuserpassword();
+	balance();
 	
 if (usernamecheckokyesno=="no"){
 alert(searchNameOri + " is not a valid User Name");
@@ -178,6 +179,55 @@ return;
 }
  
   
+function balance(){
+	var amountloantotal = 0;
+	var amountpaidtotal = 0;
+	var adjustmentstotal = 0;
+	var balancetotal = 0;
+	var balancetotal1 = 0;
+	var balancetotal2 = 0;
+		
+	var myObjLoans = JSON.parse(localStorage["myObjLoans"]);
+for (i in myObjLoans) {
+id=myObjLoans[i].id;
+ date=myObjLoans[i].date;
+ 
+  name = myObjLoans[i].name;
+  name = name.toUpperCase();
 
+  amountloan=myObjLoans[i].amountloan;
+   
+ amountpaid=myObjLoans[i].amountpaid;
+ 
+adjustments=myObjLoans[i].adjustments;
+ 
+ balance=myObjLoans[i].balance;
+ 
+ comments=myObjLoans[i].comments;
+  
+ if (name==searchName){
+//do if here
+//var sum = (+num1) + (+num2);
+testsum = (0) + (-10);
+amountloantotal = (amountloantotal) + (+amountloan);
+amountpaidtotal = (amountpaidtotal) + (+amountpaid);
+adjustmentstotal = (adjustmentstotal) + (+adjustments);
+ 
+ 
+document.getElementById("balance").value = (""+balancetotal);
+   }
+ //end of for i 
+ 
+
+}
+//balancetotal1 = (amountloantotal - amountpaidtotal);
+// balancetotal2 = (balancetotal1) + (adjustmentstotal);
+
+ balancetotal = (amountloantotal - amountpaidtotal) + (adjustmentstotal);
+ 
+   document.getElementById("balance").value = (""+balancetotal);
+   
+ 
+}
 
 	

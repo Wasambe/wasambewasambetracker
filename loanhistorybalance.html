@@ -63,9 +63,9 @@ var rowIndex;
 <!--Comment HTML-->
 
 
- <label for="username">User Name:</label><br>
+ <label for="searchName">User Name:</label><br>
    <input id="searchName" type="text"><br><br>
-     <label for="labelpassword">Password:</label><br>
+     <label for="userpassword">Password:</label><br>
   <input id="userpassword" type="password"><br><br>
   <!-- An element to toggle between password visibility -->
 <input type="checkbox" onclick="showpassword()">Show Password<br><br>
@@ -73,7 +73,8 @@ var rowIndex;
   
   <button id="SearchButton" onclick="mySearch()">Submit</button><br><br>
  
- <label for="balance">Balance:</label> <input id="balance" type="text"><br><br>
+ <label for="balance">Balance:</label> 
+ <input id="balance" type="text"><br><br>
     
    <script>
 </script>
@@ -96,14 +97,17 @@ function showpassword() {
    <script>
    //This makes button click with Enter Key
 var input = document.getElementById("searchName");
+var input = document.getElementById("userpassword");
 input.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
-   event.preventDefault();
-   document.getElementById("SearchButton").click();
+   event.preventDefault
+document.getElementById("SearchButton").click();
   }
 });
 
 </script> 
+  
+  
   
  <table id="myTable">
   <tr>

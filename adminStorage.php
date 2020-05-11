@@ -32,8 +32,8 @@ function createItems() {
   localStorage.setItem("myname", "Theopolus");
   localStorage.setItem("myage", 36);
   localStorage.setItem("myThing", "Peace and Love");
-  //localStorage.setItem("myObjLoans", "myObjLoans");
-  //localStorage.setItem("myObjUsers", "myObjUsers");
+  //localStorage.setItem("myObjLoans", "jsonMyObjLoans.txt");
+  //localStorage.setItem("myObjUsers", "jsonMyObjLoans.txt");
    mySelect.remove();
 loadDropDownList();
 }
