@@ -1,31 +1,29 @@
 <?php
-//10 Aug 2019
-$NodeUIDOK='';
+//12 May 2020
+$idOK='';
 $CrudOptionOK='';
 $CrudOptionErr='';
-$NodeUIDErr='';
+$idErr='';
 $CrudOption='';
-$NodeUID='';
-$FirstName= $MiddleName= $MaidenName= $LastName= $NickName='';
-$DateOfBirth= $PlaceOfBirth= $DateOfDeath= $PlaceOfDeath='';
-$PlaceOfBirthCity= $PlaceOfBirthState= $PlaceOfDeathCity= $PlaceOfDeathState='';
-$Tel1= $Tel2= $Email='';
-$StreetAddress= $City= $State= $Comments='';
+
+$id='';
+$date= $name= $amountloan= $amountpaid= $adjustments='';
+$balance=  $comments='';
 
 //$CrudOption = ($_POST['CrudOption']);
 //echo $CrudOption;
-//echo ($_POST['NodeUID']);
-//echo ($_POST['FirstName']);
+//echo ($_POST['id']);
+//echo ($_POST['date']);
 
 
 //if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  if (empty($_POST["NodeUID"])) {
-    $NodeUIDErr = "Node UID  is required";
+  if (empty($_POST["id"])) {
+    $idErr = "Node UID  is required";
 	//exit('this is exit');
   } else {
-	  $NodeUIDOK = 'ok';
-	  $NodeUID = ($_POST['NodeUID']);
-   echo $NodeUID;
+	  $idOK = 'ok';
+	  $id = ($_POST['id']);
+   echo $id;
    //$CrudOption = ($_POST['CrudOption']);
    // echo $CrudOption;
   }
@@ -44,28 +42,17 @@ $StreetAddress= $City= $State= $Comments='';
  
 //}
 
-If ($NodeUIDOK=='ok' && $CrudOptionOK=='ok'){
+If ($idOK=='ok' && $CrudOptionOK=='ok'){
 
  echo ('Labdah');
- $NodeUID = $_POST["NodeUID"];
-$FirstName = $_POST["FirstName"];
-$MiddleName = $_POST["MiddleName"];
-$MaidenName = $_POST["MaidenName"];
-$LastName = $_POST["LastName"];
-$NickName = ($_POST['NickName']);
-$DateOfBirth = ($_POST['DateOfBirth']);
-$PlaceOfBirthCity = ($_POST['PlaceOfBirthCity']);
-$PlaceOfBirthState = ($_POST['PlaceOfBirthState']);
-$DateOfDeath = ($_POST['DateOfDeath']);
-$PlaceOfDeathCity = ($_POST['PlaceOfDeathCity']);
-$PlaceOfDeathState = ($_POST['PlaceOfDeathState']);
-$Tel1 = ($_POST['Tel1']);
-//$Tel2 = ($_POST['Tel2']);
-$Email = ($_POST['Email']);
-//$StreetAddress= $_POST["StreetAddress"];
-$City= $_POST["City"];
-$State= $_POST["State"];
-$Comments=$_POST["Comments"];
+ $id = $_POST["id"];
+$date = $_POST["date"];
+$name = $_POST["name"];
+$amountloan = $_POST["amountloan"];
+$amountpaid = $_POST["amountpaid"];
+$adjustments = ($_POST['adjustments']);
+$balance = ($_POST["balance"]);
+$comments=$_POST["comments"];
 	
 	
 	
@@ -74,7 +61,7 @@ $Comments=$_POST["Comments"];
 $servername = "localhost";
 $username = "id4184148_localhost";
 $password = "We135711!";
-$dbname = "id4184148_testdatabase";
+$dbname = "michaelwilsontracker";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -88,27 +75,22 @@ $connYesNo = ("SqlDB connection successful");
 echo ($connYesNo);
 //echo ($Crud);	
 
-mysqli_select_db($conn,"id4184148_testdatabase");
+mysqli_select_db($conn,"michaelwilsontracker");
 
 
 If ($CrudOption == "insert"){
           //sql here
-		  $sql = "INSERT INTO testtable (NodeUID, FirstName, MiddleName, MaidenName,
-		  LastName, NickName, DateOfBirth, PlaceOfBirthCity, PlaceOfBirthState,
-		  DateOfDeath, PlaceOfDeathCity, PlaceOfDeathState,
-		  Tel1, Email, City, State, Comments)
-VALUES ('".$NodeUID."', '".$FirstName."', '".$MiddleName."',
-'".$MaidenName."', '".$LastName."', '".$NickName."',
-'".$DateOfBirth."', '".$PlaceOfBirthCity."', '".$PlaceOfBirthState."',
-'".$DateOfDeath."', '".$PlaceOfDeathCity."', '".$PlaceOfDeathState."',
-'".$Tel1."', '".$Email."', '".$City."',
-'".$State."', '".$Comments."')";
+		  $sql = "INSERT INTO loans (id, date, name, amountloan,
+		  amountpaid, adjustments, balance, comments)
+VALUES ('".$id."', '".$date."', '".$name."',
+'".$amountloan."', '".$amountpaid."', '".$adjustments."',
+'".$balance."',  '".$comments."')";
 
 $result = mysqli_query($conn,$sql);
 echo ("This is end of SQL Insert");
 }elseIf ($CrudOption == "delete"){
 		 //sql here
-	$sql = "DELETE FROM testtable WHERE NodeUID = '".$NodeUID."'";
+	$sql = "DELETE FROM loans WHERE id = '".$id."'";
 	$result = mysqli_query($conn,$sql);
 echo ("This is end of SQL DELETE");
    mysqli_close($conn);
@@ -117,40 +99,29 @@ echo ("This is end of SQL DELETE");
    echo ("This is start of SQL Select");
 	 //sql here
 
- $sql = "SELECT * FROM testtable WHERE NodeUID = '".$NodeUID."'";
+ $sql = "SELECT * FROM loans WHERE id = '".$id."'";
 	$result = mysqli_query($conn,$sql);
 	
 $rowcount = mysqli_num_rows($result);
 echo ($rowcount);
 if ($rowcount == 0){
-	echo ("This NodeUID not found");
-	$NodeUID="";
+	echo ("This id not found");
+	$id="";
 	}
 	
 	 while ($row = mysqli_fetch_array($result)){   
-	 $NodeUID=$row['NodeUID'];
-	 $FirstName=$row['FirstName'];
-	 $MiddleName=$row['MiddleName'];
-	 $MaidenName=$row['MaidenName'];
-	 $LastName=$row['LastName'];
-	 $NickName=$row['NickName'];
-	 $DateOfBirth=$row['DateOfBirth'];
-	 $PlaceOfBirthCity=$row['PlaceOfBirthCity'];
-	 $PlaceOfBirthState=$row['PlaceOfBirthState'];
-	 $DateOfDeath=$row['DateOfDeath'];
-	 $PlaceOfDeathCity=$row['PlaceOfDeathCity'];
-	  $PlaceOfDeathState=$row['PlaceOfDeathState'];
-	 $Tel1=$row['Tel1'];
-	 $Tel2=$row['Tel2'];
-	 $Email = $row['Email'];
-$StreetAddress= $row["StreetAddress"];
-$City=$row["City"];
-$State= $row["State"];
-$Comments=$row["Comments"];
+	 $id=$row['id'];
+	 $date=$row['date'];
+	 $name=$row['name'];
+	 $amountloan=$row['amountloan'];
+	 $amountpaid=$row['amountpaid'];
+	 $adjustments=$row['adjustments'];
+	 $balance=$row["balance"];
+	 $comments=$row["comments"];
 	 
 	 
 	
-	 echo ($NodeUID. "   ".$FirstName. "   ".$LastName);
+	 echo ($id. "   ".$date. "   ".$amountpaid);
 	 
   }
   
@@ -160,21 +131,16 @@ $Comments=$row["Comments"];
 	 //sql here
 	 
 	 echo ("This is elseif update");
-	 echo ($NodeUID. "   ".$FirstName. "   ".$MiddleName. "   ".$MaidenName. "   
-	  ".$LastName. "   ".$NickName." ".$DateOfBirth." ".$PlaceOfBirthCity);
+	 echo ($id. "   ".$date. "   ".$name. "   ".$amountloan. "   
+	  ".$amountpaid. "   ".$adjustments." ".$balance." ".$PlaceOfBirthCity);
 	  
-	 $sql="UPDATE testtable SET FirstName = '".$FirstName."', 
-	 MiddleName = '".$MiddleName."',
-	 MaidenName = '".$MaidenName."', 
-	 LastName = '".$LastName."', NickName = '".$NickName."',
-	 DateOfBirth = '".$DateOfBirth."', PlaceOfBirthCity = '".$PlaceOfBirthCity."',
-	 PlaceOfBirthState = '".$PlaceOfBirthState."',
-	 DateOfDeath = '".$DateOfDeath."', PlaceOfDeathCity = '".$PlaceOfDeathCity."',
-	 PlaceOfDeathState = '".$PlaceOfDeathState."',
-     Tel1 = '".$Tel1."', Email = '".$Email."',
-	    StreetAddress = '".$StreetAddress."', City = '".$City."', State = '".$State."',
-		Comments = '".$Comments."'
-	   WHERE NodeUID = '".$NodeUID."'";
+	 $sql="UPDATE loans SET date = '".$date."', 
+	 MiddleName = '".$name."',
+	 MaidenName = '".$amountloan."', 
+	 LastName = '".$amountpaid."', NickName = '".$adjustments."',
+	 DateOfBirth = '".$balance."', 
+		comments = '".$comments."'
+	   WHERE id = '".$id."'";
    
 $result = mysqli_query($conn,$sql);
 echo ("This is end of SQL Update");
@@ -226,7 +192,7 @@ var rowIndex;
 <a href="index.html">Main Menu</a><br>
 <a href="adminMenu.php"> Admin Menu</a><br>
 
-Enter First Name or Nick Name:<br>
+Enter Date or Nick Name:<br>
 
   <input id="searchName" type="text"><br><br>
   <button id="SearchButton" onclick="mySearch()">Search</button><br><br>
@@ -250,12 +216,15 @@ input.addEventListener("keyup", function(event) {
  <p id="clickForDetails">Click on family member's name for photo and details.</p>
 <table id="myTable">
   <tr>
-    <th>NUID</th>
-    <th>First Name</th>
-    <th>Middle Name</th>
-	<th>Maiden Name</th>
-    <th>Last Name</th>
-    <th>Nick Name</th>
+    <th>ID</th>
+    <th>Date</th>
+    <th>Name</th>
+	<th>Amount Loan</th>
+    <th>Amount Paid</th>
+    <th>Adjustments</th>
+	    <th>Balance</th>
+      <th>Comments</th>
+  
   </tr>
   </table>
   
@@ -283,53 +252,38 @@ input.addEventListener("keyup", function(event) {
 <input type="submit" name="submit" value="Submit"><br><br>  
 
  <div>
-<label for="node">Node UID:</label>
-<input type='text' id='node' name='NodeUID' value="<?php echo $NodeUID;?>"><br>
+<label for="node">ID:</label>
+<input type='text' id='node' name='id' value="<?php echo $id;?>"><br>
  </div>
  
   <div>
-<label for="first">First Name:</label>
- <input type="text" id='first' name="FirstName" autocomplete='off' value="<?php echo $FirstName;?>"><br>
+<label for="first">Date:</label>
+ <input type="text" id='first' name="date" autocomplete='off' value="<?php echo $date;?>"><br>
  </div>
  
   <div>
-<label for="middle">Middle Name:</label>
-<input type="text" id='middle' name="MiddleName" autocomplete='off' value="<?php echo $MiddleName;?>"><br>
+<label for="middle">Name:</label>
+<input type="text" id='middle' name="name" autocomplete='off' value="<?php echo $name;?>"><br>
  </div>
 
   <div>
-<label for="maiden">Maiden Name:</label>
-<input type="text" id='maiden' name="MaidenName" autocomplete='off' value="<?php echo $MaidenName;?>"><br>
+<label for="maiden">Amount Loan:</label>
+<input type="text" id='maiden' name="amountloan" autocomplete='off' value="<?php echo $amountloan;?>"><br>
  </div>
 
 
-<label for="last">Last Name:</label>
- <input  id='last'  type="text" name="LastName" value="<?php echo $LastName;?>"><br>
+<label for="last">Amount Paid:</label>
+ <input  id='last'  type="text" name="amountpaid" value="<?php echo $amountpaid;?>"><br>
 
-<label for="nick">Nick Name:</label>
-<input  id='nick'  type="text" name="NickName" value="<?php echo $NickName;?>"><br>
-
-
-Date Of Birth: <input type="text" name="DateOfBirth" value="<?php echo $DateOfBirth;?>"><br>
-Place Of BirthCity: <input type="text" name="PlaceOfBirthCity" value="<?php echo $PlaceOfBirthCity;?>"><br>
-Place Of BirthState: <input type="text" name="PlaceOfBirthState" value="<?php echo $PlaceOfBirthState;?>"><br>
+<label for="nick">Adjustments:</label>
+<input  id='nick'  type="text" name="adjustments" value="<?php echo $adjustments;?>"><br>
 
 
-Date Of Death: <input type="text" name="DateOfDeath" value="<?php echo $DateOfDeath;?>"><br>
-Place Of DeathCity: <input type="text" name="PlaceOfDeathCity" value="<?php echo $PlaceOfDeathCity;?>"><br>
-Place Of DeathState: <input type="text" name="PlaceOfDeathState" value="<?php echo $PlaceOfDeathState;?>"><br>
+Balance: <input type="text" name="balance" value="<?php echo $balance;?>"><br>
+Comments: <input type="text" name="comments" value="<?php echo $comments;?>"><br>
 
 
-Tel1: <input type="text" name="Tel1" value="<?php echo $Tel1;?>"><br>
-<!--Tel2: <input type="text" name="Tel2" value="<?php echo $Tel2;?>"><br>-->
-Email: <input type="text" name="Email" value="<?php echo $Email;?>"><br>
-<!--Street Address: <input type="text" name="StreetAddress" value="<?php echo $StreetAddress;?>"><br>-->
-City: <input type="text" name="City" value="<?php echo $City;?>"><br>
-State: <input type="text" name="State" value="<?php echo $State;?>"><br>
-Comments: <input type="text" name="Comments" value="<?php echo $Comments;?>"><br>
-
-
-<span class="error"> <?php echo $NodeUIDErr;?></span>
+<span class="error"> <?php echo $idErr;?></span>
 <span class="error"> <?php echo $CrudOptionErr;?></span>
 </form>
 
