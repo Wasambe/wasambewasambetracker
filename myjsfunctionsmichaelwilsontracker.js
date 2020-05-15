@@ -13,12 +13,196 @@ var $idPhp = "";
   var response = ""
   var correctIncorrect = "";
   var photoname = "";
-  var searchNameFoundYesNo="";
-var myObj = JSON.parse(localStorage["myObj"]);
+
+  
+  runadminSqlJsonLoans();
+  
+  function runadminSqlJsonLoans() {
+ var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+   myObjLoansUpdate();
+	}
+  };
+  xhttp.open("GET", "adminSqlJsonLoans.php", true);
+  xhttp.send();
+ }
+  
+  
+  
+ function myObjLoansUpdate(){
+ var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+    myObjLoans = (this.responseText);
+	localStorage.removeItem("myObjLoans");
+localStorage.setItem("myObjLoans", (myObjLoans));
+    }
+  };
+  xhttp.open("GET", "jsonMyObjLoans.txt", true);
+  xhttp.send();
+ }
+
+ 
+
+
+ function GenerateTable() {
+        //Build an array containing Customer records.
+        var customers = new Array();
+        customers.push(["Customer Id", "Name", "Country"]);
+        customers.push([1, "John Hammond", "United States"]);
+        customers.push([2, "Mudassar Khan", "India"]);
+        customers.push([3, "Suzanne Mathews", "France"]);
+        customers.push([4, "Robert Schidner", "Russia"]);
+ 
+        //Create a HTML Table element.
+        var table = document.createElement("TABLE");
+		var x = table.setAttribute("id", "tableGT");
+  var tableId = ("tableGT");
+        table.border = "1";
+ 
+         //Get the count of columns.
+        var columnCount = customers[0].length;
+ 
+        //Add the header row.
+        var row = table.insertRow(-1);
+        for (var i = 0; i < columnCount; i++) {
+            var headerCell = document.createElement("TH");
+            headerCell.innerHTML = customers[0][i];
+            row.appendChild(headerCell);
+        }
+ 
+        //Add the data rows.
+        for (var i = 1; i < customers.length; i++) {
+            row = table.insertRow(-1);
+            for (var j = 0; j < columnCount; j++) {
+                var cell = row.insertCell(-1);
+                cell.innerHTML = customers[i][j];
+            }
+        }
+		
+document.body.appendChild(table);
+ document.getElementById("tableGT").style.position = "static";
+      //  var dvTable = document.getElementById("dvTable");
+       // dvTable.innerHTML = "";
+      //  dvTable.appendChild(table);
+    }
+
+
+function arrayAddElement(){
+    fruits[fruits.length] = "Lemon";
+    document.getElementById("demoArrayAddElement").innerHTML = fruits;
+}
+  
+  
+  
+  
+/*This will randomly display a family member photo
+   each time this page is called*/
+  function randomly(){ 
+   
+var myPhotos=["24.png","25.png","26.png","27.png","29.png", "30.png", "32.png"];
+var photo = myPhotos[Math.floor(Math.random() * myPhotos.length)];
+console.log (photo);
+var urlVarR = ("images/" + photo);
+var innerVarR = "<img src=' " + urlVarR + " '>";
+//document.getElementById("imgRandom").innerHTML = innerVar1;
+
+//document.getElementById("imgRandom").innerHTML = "<img src='images/30.png'>";
+//document.getElementById("imgRandom").src = "images/24.png";
+document.getElementById("imgRandom").src = urlVarR;
+}
+  
+ 
+function myGuessExtractNumber(){
+	
+	var myguessOri = document.forms["myForm"]["fname"].value; 
+	if (myguessOri == ""){
+		alert ("You must enter a First Name or a Nick Name.");
+		return;
+	}
+	
+	
+	var photoname = document.getElementById("imageholder").innerHTML;
+		//var str = "44.png" 
+	var str = photoname;
+	var n = str.length;
+var i = 0;
+
+for (i = 0; i < n; i++) {
+   // text += "The number is " + i + "<br>";
+	    ch = str.charAt(i);
+		
+		// check if ch is a letter
+//if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z'))
+ 	//str = idvar;
+//	return;
+
+// check if ch is a digit
+if (ch >= '0' && ch <= '9')
+	//document.getElementById("demois").innerHTML = ch + " is a digit";	 
+		idvar = (idvar + ch);
+		$idvar = idvar;
+		
+	
+}
+
+
+
+ console.log (idvar);
+    
+  if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+  } else { // code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange=function() {
+    if (this.readyState==4 && this.status==200) {
+  document.getElementById("ajax").innerHTML=this.responseText;
+	      }
+  }
+  //xmlhttp.open("GET","ajaxowl.txt",true);
+ xmlhttp.open("GET","getuserowl.php?q="+idvar,true);
+  xmlhttp.send();
+ // idvar = "";
+
+
+	
+}
+
+
+
+function loopThruArray(){
+	var fruits, text, fLen, i;
+fruits = ["Banana", "Orange", "Apple", "Mango"];
+fLen = fruits.length;
+
+text = "<ul>";
+for (i = 0; i < fLen; i++) {
+    text += "<li>" + fruits[i] + "</li>";
+}
+text += "</ul>";
+
+document.getElementById("demoloopThruArray").innerHTML = text;
+
+}
+
+
 
 function mySearch() {
-	searchNameFoundYesNo="No";
- 
+	
+
+document.getElementById("imageholder").innerHTML= "";
+	
+
+  try{
+ var myDiv = document.getElementById("myDIV");
+myDiv.remove();
+ }catch{
+ // do nothing
+ }
+
 var x = document.getElementById("myTable").rows.length;
 var i=x
 while (i > 1) {
@@ -30,25 +214,22 @@ searchName = document.getElementById("searchName").value
 searchName = searchName.toUpperCase();
   
 for (i in myObj) {
-id=myObj[i].id;
+nuid=myObj[i].NodeUID;
+  fn = myObj[i].FirstName  ;
+   fn = fn.toUpperCase();
+    mn=myObj[i].MiddleName;
+ mn = mn.toUpperCase();
+  man=myObj[i].MaidenName;
+ man = man.toUpperCase();
+ ln=myObj[i].LastName;
+ ln = ln.toUpperCase();
+   nn=myObj[i].NickName;
+ nn = nn.toUpperCase();
+  fnn=myObj[i].FirstNickName;
+ fnn = fnn.toUpperCase();
 
-    date=myObj[i].date;
+ if (fnn.includes(searchName)==true){
  
-  name = myObj[i].name;
-  name = name.toUpperCase();
-
-  amountloan=myObj[i].amountloan;
- 
- amountpaid=myObj[i].amountpaid;
- 
-adjustments=myObj[i].adjustments;
- 
- balance=myObj[i].balance;
- 
- comments=myObj[i].comments;
-  
- if (name.includes(searchName)==true){
-searchNameFoundYesNo="Yes";
   createTable();
   document.getElementById("myTable").style.visibility = "visible";
   document.getElementById("clickForDetails").style.visibility = "visible";
@@ -57,12 +238,6 @@ searchNameFoundYesNo="Yes";
  }
  
   }
-  
-  
-  if (searchNameFoundYesNo=="No"){
-alert("No match was found for your search " + searchName);	 
-return;
- }
 
 // var x = document.getElementById("myTable").rows.length;
 }
@@ -87,11 +262,10 @@ return;
  z4.innerHTML = (amountloan);
  z5.innerHTML = (amountpaid);
  z6.innerHTML = (adjustments);
- z7.innerHTML = (balance);
- z8.innerHTML = (comments);
- 
-  y.appendChild(z1);
-    y.appendChild(z2);
+  z7.innerHTML =(balance);
+    z8.innerHTML =(comments);
+	y.appendChild(z1);
+	y.appendChild(z2);
 	y.appendChild(z3);
 	y.appendChild(z4);
 	y.appendChild(z5);
@@ -107,7 +281,9 @@ para.appendChild(node);
 
 }
  
-   
+ 
+ 
+  
 function addClick() {
     var table = document.getElementById('myTable');
     var cells = table.getElementsByTagName('td');
@@ -126,8 +302,14 @@ idvar=(document.getElementById("myTable").rows[rowId].cells[0].innerHTML);
 alert(idvar);
 }
    }
+
 }
 
+
+
+ 
+  
+ 
   function addClickTable(){
    var table = document.getElementById('myTable');
     var rows = table.getElementsByTagName('tr');
@@ -152,8 +334,6 @@ myDiv.id=("myDIV");
 			}
 			//alert(rowIndex);
 			idvar = (this.cells[0].innerHTML);
-			showPhoto();
-			showFamilyMemberInfo();
 			 deleteRows();
 			document.getElementById("myTable").style.visibility = "hidden";
 			document.getElementById("clickForDetails").style.visibility = "hidden";
@@ -180,14 +360,6 @@ function rowIndex(){
 
 
 
-
-function showPhoto(){
-	var urlvar = "";
-	urlvar = ("images/" + idvar + ".png");
-	 var repImage = "<img src=' " + urlvar + " '>";
-	document.getElementById("imageholder").innerHTML= repImage;
-		}
-		
 		function deleteRows(){
 			var x = document.getElementById("myTable").rows.length;
 var i=x
@@ -198,6 +370,8 @@ while (i > 1) {
 idvar = "";
 	 }
 
+  
+  
   
   function showFamilyMemberInfo(){
   
@@ -238,8 +412,7 @@ idvar = "";
  city=myObj[i].City;
  //city=city.toUpperCase();
  state=myObj[i].State;
- //state=state.toUpperCase
-  comments=myObj[i].Comments;
+ //state=state.toUpperCase();
  }
 	}
 	
@@ -286,12 +459,60 @@ document.getElementById("myDIV").appendChild(ptel1);     // Append <p> to <div> 
 				var pemail = document.createElement("P");                 // Create a <p> element
 pemail.innerHTML = "Email: " + email;                // Insert text
 document.getElementById("myDIV").appendChild(pemail);     // Append <p> to <div> with id="myDIV"
-  
-  var pcomments = document.createElement("P");                 // Create a <p> element
-pcomments.innerHTML = "Comments: " + comments;                // Insert text
-document.getElementById("myDIV").appendChild(pcomments);     // Append <p> to <div> with id="myDIV"
-
-  
   }
   
+
+function mySearchLoans() {
+
+//runadminSqlJsonLoans();
+//myObjLoansUpdate();
+
+
+document.getElementById("imageholder").innerHTML= "";
+	
+
+  try{
+ var myDiv = document.getElementById("myDIV");
+myDiv.remove();
+ }catch{
+ // do nothing
+ }
+
+var x = document.getElementById("myTable").rows.length;
+var i=x
+while (i > 1) {
+ document.getElementById("myTable").deleteRow(1);
+  i=i-1;
+}
+
+searchName = document.getElementById("searchName").value
+searchName = searchName.toUpperCase();
+  
+ var myObjLoans = JSON.parse(localStorage["myObjLoans"]);
+  
+for (i in myObjLoans) {
+id=myObjLoans[i].id;
+  date = myObjLoans[i].date ;
+  name = myObjLoans[i].name;
+  name = name.toUpperCase();
+  
+    amountloan=myObjLoans[i].amountloan;
+  amountpaid=myObjLoans[i].amountpaid;
+ adjustments=myObjLoans[i].adjustments;
+   balance=myObjLoans[i].balance;
+  comments=myObjLoans[i].comments;
+ 
+ if (name.includes(searchName)==true){
+ 
+  createTable();
+  document.getElementById("myTable").style.visibility = "visible";
+  document.getElementById("clickForDetails").style.visibility = "visible";
+   addClickTable();
+
+ }
+ 
+  }
+
+// var x = document.getElementById("myTable").rows.length;
+}
 

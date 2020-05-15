@@ -15,9 +15,9 @@
 <a href="adminMenu.php"> Admin Menu</a><br><br>
 
 <button onclick="createItems()">Create local storage items</button><br><br>
-<button onclick="displayItems()">Display items</button>
-<p id="displayItemsHere"></p><br>
-<button onclick="deleteItems()">Delete items</button><br>
+<button onclick="displayItems()">Display items</button><br><br>
+<p id="displayItemsHere"></p><br><br>
+<button onclick="deleteItems()">Delete items</button><br><br>
 
 <!--
 <select id="mySelect"/><br>

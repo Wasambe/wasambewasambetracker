@@ -94,8 +94,7 @@ echo ("This is end of SQL Insert");
 	$result = mysqli_query($conn,$sql);
 echo ("This is end of SQL DELETE");
    mysqli_close($conn);
-
-}elseIf ($CrudOption == "select"){
+   }elseIf ($CrudOption == "select"){
    echo ("This is start of SQL Select");
 	 //sql here
 
@@ -132,7 +131,7 @@ if ($rowcount == 0){
 	 
 	 echo ("This is elseif update");
 	 echo ($id. "   ".$date. "   ".$name. "   ".$amountloan. "   
-	  ".$amountpaid. "   ".$adjustments." ".$balance." ".$PlaceOfBirthCity);
+	  ".$amountpaid. "   ".$adjustments." ".$balance." ".$comments);
 	  
 	 $sql="UPDATE loans SET date = '".$date."', 
 	 MiddleName = '".$name."',
@@ -154,7 +153,7 @@ echo ("This is end of SQL Update");
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="jquery-3.3.1.js"></script>
-<script src="myJsFunctions.js"></script>
+<script src="myjsfunctionsmichaelwilsontracker.js"></script>
 <style>
 table, th, td {
   border: 1px solid black;
@@ -179,9 +178,26 @@ tr:nth-child(even) {
 </style>
 
 
+<!--
+this xhttp request moved to myjsfunctionsmichaelwilsontracker
+so as to make var myObjLoans available to all CRUD options
 <script>
-var myTable = document.getElementById("myTable");
-var myObj = JSON.parse(localStorage["myObj"]);
+ var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+    myObjLoans = (this.responseText);
+	localStorage.removeItem("myObjLoans");
+localStorage.setItem("myObjLoans", (myObjLoans));
+    }
+  };
+  xhttp.open("GET", "jsonMyObjLoans.txt", true);
+  xhttp.send();
+var myObjLoans = JSON.parse(localStorage["myObjLoans"]);
+ </script>
+-->
+
+<script>
+  var myTable = document.getElementById("myTable");
 var rowIndex;
 </script>
   
@@ -195,12 +211,11 @@ var rowIndex;
 Enter Date or Nick Name:<br>
 
   <input id="searchName" type="text"><br><br>
-  <button id="SearchButton" onclick="mySearch()">Search</button><br><br>
+  <button id="SearchButton" onclick="mySearchLoans()">Search</button><br><br>
   
   <p id="demo"></p>
   
    <script>
-//document.getElementById("demo").innerHTML=myObj;
 </script>
    <script>
 var input = document.getElementById("searchName");
@@ -213,7 +228,7 @@ input.addEventListener("keyup", function(event) {
 
 </script> 
   
- <p id="clickForDetails">Click on family member's name for photo and details.</p>
+ <p id="clickForDetails">Click on Name for details.</p>
 <table id="myTable">
   <tr>
     <th>ID</th>
@@ -229,8 +244,8 @@ input.addEventListener("keyup", function(event) {
   </table>
   
   <script>
-	document.getElementById("myTable").style.visibility = "hidden";
-			document.getElementById("clickForDetails").style.visibility = "hidden";
+	document.getElementById("myTable").style.visibility = "visible";
+			document.getElementById("clickForDetails").style.visibility = "visible";
  </script>  
 
   

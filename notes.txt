@@ -1,104 +1,5 @@
-03 Jan 2020
-Good progress on automating myObj/pngFiles.
-After any changes to the sqlDb manually or thru CRUD the following must happen.
-1. From adminMenu.html I must run sqlJson which exports testtable into
-the $myObj variable, then saves the $myObj variable as jsonMyObj.txt file.
-2. I then run index.html which creates myObj from the jsonMyObj.txt file, 
-deletes the old local storage myObj and creates new myObj.
-3. Then the updated myObj variable is available for both searchfamilymember.html
-and whodat.html
-
-The problem I'm now having is that I have to run index.html with Google console
-(Function f12) open to get the myObj to update with the new data.
-Problem happens because index.html was opening the admin.php in a new window.
-Solution - Have index.html open admin.php is same window.
-
-01 Jan 2020
-localstorage index.html the old storage file must first be deleted.
-
-26 Dec 2019
-Cannot fully automate pngFiles and the myObj process.
-For now I will use their respective PHP pages 
-(adminImages.php and adminSqlJson.php)
-and copy the results into the variable declaration in the <script>
-section of the index.html file.<script> 
-The same <script> will then put the variables in localstorage.
-This way both variables will be available throughout the program
-on all computers, domains and devices after uploading to Github.
-
-
-23 Dec 2019
-Github does not support anything php related. (files, pages, scripts).
-
-
-21 Dec 2019
-html js php thoughts
-I can run js in html page but I cannot run php in html page because 
-php can only be processed from a php page. If I want to run html and
-php together I must run it from a php  page.
-***the big question is - "should I use php pages so I can use html js and php?"
-The answer is yes if I'm working on a server that supports php but 
-most free hosting sites use servers that do not support php.
-***When I'm testing on my localhost server I have php support so 
-I will do my php work (ex:iterate directory) and pass the final info to
-my html page via js. I hope it works.
-
-
-15 Dec 2019
-000Webhost.com archived my Website around Oct 2019. They will only
-unarchive it if I open a paid premium account. So I am attempting to convert
-all of the php/mysql code to javascript.
-
-To use the program after these conversions I must
-1. Update my localhost sql database with any new family info.
-2. Export the testtable as a json file.
-3. Edit the json file by opening and deleting the headers resulting in an array [{...}]
-4. Copy and paste the edited file into index.html
-
-14 Feb 2019
-/*
-This is how to echo a html form using php. 
-It seems to be you must use " quotation marks outside 
-and ' single quotation marks inside
-echo "<form action='myPhpFunctions.php' method='POST'>"; 
-echo  "First Name:<input type='text' name='FirstNameEcho' value='$FirstName'/>"; 
-echo  "Last Name:<input type='text' name='LastNameEcho' value='$LastName'/>"; 
-echo  "<input type='submit' value='Submit'>";
-echo "</form>"; 
-*/
-
-
-13 Feb 2019
-/*
-function crudAdd(){
-	echo ("This is crudAdd");
-}
-
-function crudDelete(){
-	echo ("This is crudDelete");
-}
-
-function crudEdit(){
-	echo ("This is crudEdit");
-}
-function crudSelect(){
-	echo ("This is crudSelect");
-}
-function crudUpdate(){
-	echo ("This is crudUpdate");
-	}
-	*/
-
-
-echo '<form action="" method="post">
-      <input type="text" name="yourname" value="'.$name.'"<br>
-     <input type="text" name="yourname" value="'.$code.'"<br> 
-     <input type="text" name="yourname" value="'.$password.'"<br> 
-</form>';
-
-
+***
 23 Jan 2019
-
 
 From html I cannot call a php function in another php file. 
 
@@ -177,4 +78,130 @@ tree.getChildAt() is counted from 0.... starting with Sally
 	        and Grandpa number 15
   tree.getDescendent(15).addChild(TREE.create("Gladys"));
   
+
+
+13 Feb 2019
+/*
+function crudAdd(){
+	echo ("This is crudAdd");
+}
+
+function crudDelete(){
+	echo ("This is crudDelete");
+}
+
+function crudEdit(){
+	echo ("This is crudEdit");
+}
+function crudSelect(){
+	echo ("This is crudSelect");
+}
+function crudUpdate(){
+	echo ("This is crudUpdate");
+	}
+	*/
+
+
+echo '<form action="" method="post">
+      <input type="text" name="yourname" value="'.$name.'"<br>
+     <input type="text" name="yourname" value="'.$code.'"<br> 
+     <input type="text" name="yourname" value="'.$password.'"<br> 
+</form>';
+
+
+***
+14 Feb 2019
+/*
+This is how to echo a html form using php. 
+It seems to be you must use " quotation marks outside 
+and ' single quotation marks inside
+echo "<form action='myPhpFunctions.php' method='POST'>"; 
+echo  "First Name:<input type='text' name='FirstNameEcho' value='$FirstName'/>"; 
+echo  "Last Name:<input type='text' name='LastNameEcho' value='$LastName'/>"; 
+echo  "<input type='submit' value='Submit'>";
+echo "</form>"; 
+*/
+
+
+
+***
+
+15 Dec 2019
+000Webhost.com archived my Website around Oct 2019. They will only
+unarchive it if I open a paid premium account. So I am attempting to convert
+all of the php/mysql code to javascript.
+
+To use the program after these conversions I must
+1. Update my localhost sql database with any new family info.
+2. Export the testtable as a json file.
+3. Edit the json file by opening and deleting the headers resulting in an array [{...}]
+4. Copy and paste the edited file into index.html
+
+
+
+***
+21 Dec 2019
+html js php thoughts
+I can run js in html page but I cannot run php in html page because 
+php can only be processed from a php page. If I want to run html and
+php together I must run it from a php  page.
+***the big question is - "should I use php pages so I can use html js and php?"
+The answer is yes if I'm working on a server that supports php but 
+most free hosting sites use servers that do not support php.
+***When I'm testing on my localhost server I have php support so 
+I will do my php work (ex:iterate directory) and pass the final info to
+my html page via js. I hope it works.
+
+
+***
+
+23 Dec 2019
+Github does not support anything php related. (files, pages, scripts).
+
+***
+26 Dec 2019
+Cannot fully automate pngFiles and the myObj process.
+For now I will use their respective PHP pages 
+(adminImages.php and adminSqlJson.php)
+and copy the results into the variable declaration in the <script>
+section of the index.html file.<script> 
+The same <script> will then put the variables in localstorage.
+This way both variables will be available throughout the program
+on all computers, domains and devices after uploading to Github.
+
+***
+01 Jan 2020
+localstorage index.html the old storage file must first be deleted.
+
+
+***
+03 Jan 2020
+Good progress on automating myObj/pngFiles.
+After any changes to the sqlDb manually or thru CRUD the following must happen.
+1. From adminMenu.html I must run sqlJson which exports testtable into
+the $myObj variable, then saves the $myObj variable as jsonMyObj.txt file.
+2. I then run index.html which creates myObj from the jsonMyObj.txt file, 
+deletes the old local storage myObj and creates new myObj.
+3. Then the updated myObj variable is available for both searchfamilymember.html
+and whodat.html
+
+The problem I'm now having is that I have to run index.html with Google console
+(Function f12) open to get the myObj to update with the new data.
+Problem happens because index.html was opening the admin.php in a new window.
+Solution - Have index.html open admin.php is same window.
+
+
+***
+01 May 2020
+Started MichaelWilsonTracker website. Using ThomasFamilyTree Website code logic
+of LocalStorage for SqliteDB functionality.
+ 
+
+
+
+
+
+
+
+
 
