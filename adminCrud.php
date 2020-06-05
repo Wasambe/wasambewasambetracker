@@ -86,7 +86,15 @@ VALUES ('".$id."', '".$date."', '".$name."',
 '".$amountloan."', '".$amountpaid."', '".$adjustments."',
 '".$balance."',  '".$comments."')";
 
-$result = mysqli_query($conn,$sql);
+//$result = mysqli_query($conn,$sql);
+
+if ($result = mysqli_query($conn, $sql)) {
+  echo "New record created successfully";
+} else {
+  echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+}
+
+
 echo ("This is end of SQL Insert");
 }elseIf ($CrudOption == "delete"){
 		 //sql here
@@ -130,16 +138,19 @@ if ($rowcount == 0){
 	 //sql here
 	 
 	 echo ("This is elseif update");
-	 echo ($id. "   ".$date. "   ".$name. "   ".$amountloan. "   
-	  ".$amountpaid. "   ".$adjustments." ".$balance." ".$comments);
 	  
 	 $sql="UPDATE loans SET date = '".$date."', 
-	 MiddleName = '".$name."',
-	 MaidenName = '".$amountloan."', 
-	 LastName = '".$amountpaid."', NickName = '".$adjustments."',
-	 DateOfBirth = '".$balance."', 
-		comments = '".$comments."'
+	 name = '".$name."',
+	 amountloan = '".$amountloan."', 
+	 amountpaid = '".$amountpaid."', 
+	 adjustments = '".$adjustments."',
+	 balance = '".$balance."', 
+	comments = '".$comments."'
 	   WHERE id = '".$id."'";
+	   
+	    echo ($id. "   ".$date. "   ".$name. "   ".$amountloan. "   
+	  ".$amountpaid. "   ".$adjustments." ".$balance." ".$comments);
+	
    
 $result = mysqli_query($conn,$sql);
 echo ("This is end of SQL Update");
@@ -267,35 +278,37 @@ input.addEventListener("keyup", function(event) {
 <input type="submit" name="submit" value="Submit"><br><br>  
 
  <div>
-<label for="node">ID:</label>
-<input type='text' id='node' name='id' value="<?php echo $id;?>"><br>
+<label for="id">ID:</label>
+<input type='text' id='id' name='id' value="<?php echo $id;?>"><br>
  </div>
  
   <div>
-<label for="first">Date:</label>
- <input type="text" id='first' name="date" autocomplete='off' value="<?php echo $date;?>"><br>
+<label for="date">Date:</label>
+ <input type="text" id='date' name="date" autocomplete='off' value="<?php echo $date;?>"><br>
  </div>
  
   <div>
-<label for="middle">Name:</label>
-<input type="text" id='middle' name="name" autocomplete='off' value="<?php echo $name;?>"><br>
+<label for="name">Name:</label>
+<input type="text" id='name' name="name" autocomplete='off' value="<?php echo $name;?>"><br>
  </div>
 
   <div>
-<label for="maiden">Amount Loan:</label>
-<input type="text" id='maiden' name="amountloan" autocomplete='off' value="<?php echo $amountloan;?>"><br>
+<label for="amountloan">Amount Loan:</label>
+<input type="text" id='amountloan' name="amountloan" autocomplete='off' value="<?php echo $amountloan;?>"><br>
  </div>
 
+  
+<label for="amountpaid">Amount Paid:</label>
+ <input  id='amountpaid'  type="text" name="amountpaid" value="<?php echo $amountpaid;?>"><br>
 
-<label for="last">Amount Paid:</label>
- <input  id='last'  type="text" name="amountpaid" value="<?php echo $amountpaid;?>"><br>
+<label for="adjustments">Adjustments:</label>
+<input  id='adjustments'  type="text" name="adjustments" value="<?php echo $adjustments;?>"><br>
 
-<label for="nick">Adjustments:</label>
-<input  id='nick'  type="text" name="adjustments" value="<?php echo $adjustments;?>"><br>
+<label for="balance">Balance:</label>
+ <input id='balance' type="text" name="balance" value="<?php echo $balance;?>"><br>
 
-
-Balance: <input type="text" name="balance" value="<?php echo $balance;?>"><br>
-Comments: <input type="text" name="comments" value="<?php echo $comments;?>"><br>
+<label for="comments">Comments:</label>
+   <input id='comments' type="text" name="comments" value="<?php echo $comments;?>"><br>
 
 
 <span class="error"> <?php echo $idErr;?></span>
