@@ -70,16 +70,18 @@ var rowIndex;
  
 
     <h1>Login</h1>
-
- <label for="searchName">User Name:</label><br>
-   <input id="searchName" type="text"><br><br>
+<form id="loginform">
+ <label for="username">User Name:</label><br>
+   <input id="username" type="text"><br><br>
      <label for="userpassword">Password:</label><br>
   <input id="userpassword" type="password"><br><br>
   <!-- An element to toggle between password visibility -->
 <input type="checkbox" onclick="showpassword()">Show Password<br><br>
- 
- <button id="SearchButton" onclick="mySearch()">Submit</button><br><br>
- 
+ <button id="SearchButton"type="button" onclick="login()">Submit</button><br><br>
+
+ </form> 
+
+
  <label for="balance">Balance:</label> 
  <input id="balance" type="text"><br><br>
     
@@ -104,7 +106,7 @@ function showpassword() {
 
    <script>
    //This makes button click with Enter Key
-var input = document.getElementById("searchName");
+var input = document.getElementById("username");
 var input = document.getElementById("userpassword");
 input.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {

@@ -13,10 +13,10 @@ var $idPhp = "";
   var response = ""
   var correctIncorrect = "";
   var photoname = "";
-  var searchNameFoundYesNo="";
+  var usernameFoundYesNo="";
   var username="";
 var userpassword="";
-var searchNameOri="";
+var usernameOri="";
 
 //var myObjUsers = JSON.parse(localStorage["myObjUsers"]);
 //var myObjLoans = JSON.parse(localStorage["myObjLoans"]);
@@ -25,19 +25,19 @@ var passwordcheckokyesno = "";
 
 
 function checkusername(){
-	searchNameOri = document.getElementById("searchName").value
-	searchName = document.getElementById("searchName").value
-searchName = searchName.toUpperCase();
+	usernameOri = document.getElementById("username").value
+	username = document.getElementById("username").value
+	username = username.toUpperCase();
 
 	
 	var myObjUsers = JSON.parse(localStorage["myObjUsers"]);
 for (i in myObjUsers) {
 
 id=myObjUsers[i].id;
-username=myObjUsers[i].username;
-	username = username.toUpperCase();
+usernameobj=myObjUsers[i].username;
+	usernameobj = usernameobj.toUpperCase();
 
-	if (username==searchName){
+	if (usernameobj==username){
 		usernamecheckokyesno = "yes";
 		return;
 	}
@@ -51,7 +51,7 @@ function checkuserpassword(){
 var myObjUsers = JSON.parse(localStorage["myObjUsers"]);
 //for (i in myObjUsers) {
 
-username=myObjUsers[i].username;
+usernameobj=myObjUsers[i].username;
 passwordobj=myObjUsers[i].userpassword;
 	
 	if (userpassword==passwordobj){
@@ -63,12 +63,12 @@ passwordcheckokyesno = "no";
 }
 
 
-function mySearch() {
-	searchName = document.getElementById("searchName").value
+function login() {
+	username = document.getElementById("username").value
 	userpassword = document.getElementById("userpassword").value
 
 		
-if (searchName==""){
+if (username==""){
 alert("You must enter a User Name");
 return;
 }
@@ -81,13 +81,12 @@ return;
 
 
 	
-	searchNameFoundYesNo="No";
+	usernameFoundYesNo="No";
 	checkusername();
 	checkuserpassword();
-	balance();
 	
 if (usernamecheckokyesno=="no"){
-alert(searchNameOri + " is not a valid User Name");
+alert(usernameOri + " is not a valid User Name");
 return;
 }
 
@@ -97,6 +96,9 @@ alert("Password is not correct");
 return;
 }
 
+
+balance();
+	
  
 var x = document.getElementById("myTable").rows.length;
 var i=x
@@ -105,8 +107,8 @@ while (i > 1) {
   i=i-1;
 }
 
-searchName = document.getElementById("searchName").value
-searchName = searchName.toUpperCase();
+username = document.getElementById("username").value
+username = username.toUpperCase();
   
   var myObjLoans = JSON.parse(localStorage["myObjLoans"]);
 for (i in myObjLoans) {
@@ -127,16 +129,16 @@ adjustments=myObjLoans[i].adjustments;
  
  comments=myObjLoans[i].comments;
   
- if (name==searchName){
-searchNameFoundYesNo="Yes";
+ if (name==username){
+usernameFoundYesNo="Yes";
   createTable();
   document.getElementById("myTable").style.visibility = "visible";
    }
    }
   
   
-  if (searchNameFoundYesNo=="No"){
-alert(searchNameOri + " is not a valid User Name");	 
+  if (usernameFoundYesNo=="No"){
+alert(usernameOri + " is not a valid User Name");	 
 return;
  }
 
@@ -205,10 +207,7 @@ adjustments=myObjLoans[i].adjustments;
  
  comments=myObjLoans[i].comments;
   
- if (name==searchName){
-//do if here
-//var sum = (+num1) + (+num2);
-testsum = (0) + (-10);
+ if (name==username){
 amountloantotal = (amountloantotal) + (+amountloan);
 amountpaidtotal = (amountpaidtotal) + (+amountpaid);
 adjustmentstotal = (adjustmentstotal) + (+adjustments);
