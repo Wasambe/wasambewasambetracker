@@ -34,6 +34,23 @@ else{
 $myObjUsers = json_encode($data);
 echo $myObjUsers;
 
+
+
+// PHP program to delete a file named gfg.txt  
+// using unlike() function  
+   
+$file_pointer = "jsonMyObjUsers.txt";  
+   
+// Use unlink() function to delete a file  
+if (!unlink($file_pointer)) {  
+    echo ("$file_pointer cannot be deleted due to an error");  
+}  
+else {  
+    echo ("$file_pointer has been deleted");  
+}  
+ 
+
+
 $myfile = fopen("jsonMyObjUsers.txt", "w") or die("Unable to open file!");
 $txt = $myObjUsers;
 fwrite($myfile, $txt);
