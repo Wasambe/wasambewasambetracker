@@ -37,7 +37,7 @@ echo $myObjUsers;
 
 
 // PHP program to delete a file named gfg.txt  
-// using unlike() function  
+// using unlink() function  
    
 $file_pointer = "jsonMyObjUsers.txt";  
    

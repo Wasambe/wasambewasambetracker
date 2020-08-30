@@ -1,5 +1,5 @@
-//zzz
-
+//comment
+//test
 var photoname = "";
 
 var strglobal = "";
