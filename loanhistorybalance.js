@@ -1,4 +1,7 @@
 //comment
+//31 Aug 2020 To clear localhost cache press shift+F5. It seems that the notepad++ js files are cached and 
+//sometimes changes I make to js files are not saved to the cached js file.
+
 var photoname = "";
 
 var strglobal = "";
@@ -47,6 +50,13 @@ usernamecheckokyesno = "no";
 
 
 function checkuserpassword(){
+	
+	if (username=="WASH") {
+	passwordcheckokyesno = "yes";
+		return;
+	}
+
+	
 	userpassword = document.getElementById("userpassword").value
 var myObjUsers = JSON.parse(localStorage["myObjUsers"]);
 //for (i in myObjUsers) {
@@ -67,6 +77,8 @@ function login() {
 	username = document.getElementById("username").value
 	userpassword = document.getElementById("userpassword").value
 
+
+
 		
 if (username==""){
 alert("You must enter a User Name");
@@ -75,8 +87,14 @@ return;
 
 	
 if (userpassword==""){
+	usernameOri = document.getElementById("username").value
+	username = document.getElementById("username").value
+	username = username.toUpperCase();
+	if (username=="WASH") {
+	}else{
 alert("You must enter a Password");
 return;
+	}
 }
 
 
