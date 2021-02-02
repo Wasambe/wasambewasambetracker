@@ -209,7 +209,17 @@ function balance(){
 		
 	var myObjLoans = JSON.parse(localStorage["myObjLoans"]);
 for (i in myObjLoans) {
+
 id=myObjLoans[i].id;
+
+
+//02 Feb 2021 This if checks for id value when I'm not sure CRUD
+//has updated properly
+//	if (id==96){
+//		console.log ("id=96");
+//	}
+	
+
  date=myObjLoans[i].date;
  
   name = myObjLoans[i].name;
