@@ -293,12 +293,12 @@ input.addEventListener("keyup", function(event) {
  </div>
 
   <div>
-<label for="amountloan">Amount Loan:</label>
+<label for="amountloan">Amount Loan / Amout In</label>
 <input type="text" id='amountloan' name="amountloan" autocomplete='off' value="<?php echo $amountloan;?>"><br>
  </div>
 
   
-<label for="amountpaid">Amount Paid:</label>
+<label for="amountpaid">Amount Paid / Amount Out</label>
  <input  id='amountpaid'  type="text" name="amountpaid" value="<?php echo $amountpaid;?>"><br>
 
 <label for="adjustments">Adjustments:</label>

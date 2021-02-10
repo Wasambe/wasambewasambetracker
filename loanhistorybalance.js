@@ -73,6 +73,7 @@ passwordcheckokyesno = "no";
 }
 
 
+//start login here
 function login() {
 	username = document.getElementById("username").value
 	userpassword = document.getElementById("userpassword").value
@@ -129,6 +130,7 @@ username = document.getElementById("username").value
 username = username.toUpperCase();
   
   var myObjLoans = JSON.parse(localStorage["myObjLoans"]);
+  //start for here
 for (i in myObjLoans) {
 id=myObjLoans[i].id;
 
@@ -149,19 +151,33 @@ adjustments=myObjLoans[i].adjustments;
   
  if (name==username){
 usernameFoundYesNo="Yes";
+ 
+
+if (name=="JANATLAND" || name=="BUSIA"){
   createTable();
+  document.getElementById("myTableInOut").style.visibility = "visible";
+  document.getElementById("myTable").style.visibility = "hidden";
+}else{ 
+createTable();
   document.getElementById("myTable").style.visibility = "visible";
+	    document.getElementById("myTableInOut").style.visibility = "hidden";
+	}
+
+  }
+   
+   
+   
    }
-   }
-  
+//end for loop here 
   
   if (usernameFoundYesNo=="No"){
 alert(usernameOri + " is not a valid User Name");	 
 return;
  }
 
-// var x = document.getElementById("myTable").rows.length;
+
 }
+//end login here
 
 
 
@@ -180,8 +196,14 @@ return;
   z1.innerHTML = (id);
  z2.innerHTML = (date);
  z3.innerHTML = (name);
+ 
+ //if (username=="JANATLAND"){
+//z4.innerHTML = (amountloan);
+// z5.innerHTML = (amountpaid);
+// }else{
  z4.innerHTML = (amountloan);
  z5.innerHTML = (amountpaid);
+// }
  z6.innerHTML = (adjustments);
 // z7.innerHTML = (balance);
  z8.innerHTML = (comments);
@@ -195,7 +217,12 @@ return;
 	//y.appendChild(z7);
 	y.appendChild(z8);
   x.appendChild(y);
-  document.getElementById("myTable").appendChild(x);
+
+if (name=="JANATLAND" || name=="BUSIA"){
+  document.getElementById("myTableInOut").appendChild(x);
+}else{
+	document.getElementById("myTable").appendChild(x);
+}
 }
  
   
