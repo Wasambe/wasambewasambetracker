@@ -61,7 +61,7 @@ $comments=$_POST["comments"];
 $servername = "localhost";
 $username = "id4184148_localhost";
 $password = "We135711!";
-$dbname = "wasambewasambetracker";
+$dbname = "michaelwilsontracker";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -75,7 +75,7 @@ $connYesNo = ("SqlDB connection successful");
 echo ($connYesNo);
 //echo ($Crud);	
 
-mysqli_select_db($conn,"wasambewasambetracker");
+mysqli_select_db($conn,"michaelwilsontracker");
 
 
 If ($CrudOption == "insert"){
@@ -164,7 +164,7 @@ echo ("This is end of SQL Update");
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="jquery-3.3.1.js"></script>
-<script src="myjsfunctionswasambewasambetracker.js"></script>
+<script src="myjsfunctionsmichaelwilsontracker.js"></script>
 <style>
 table, th, td {
   border: 1px solid black;
@@ -190,7 +190,7 @@ tr:nth-child(even) {
 
 
 <!--
-this xhttp request moved to myjsfunctionswasambewasambetracker
+this xhttp request moved to myjsfunctionsmichaelwilsontracker
 so as to make var myObjLoans available to all CRUD options
 <script>
  var xhttp = new XMLHttpRequest();
