@@ -242,8 +242,8 @@ id=myObjLoans[i].id;
 
 //02 Feb 2021 This if checks for id value when I'm not sure CRUD
 //has updated properly
-	if (id==97){
-		console.log ("id=97");
+	if (id==124){
+		console.log ("id= " + id);
 	}
 	
 

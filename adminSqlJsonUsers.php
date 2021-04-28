@@ -8,7 +8,7 @@
 $servername = "localhost";
 $username = "id4184148_localhost";
 $password = "We135711!";
-$dbname = "michaelwilsontracker";
+$dbname = "wasambewasambetracker";
 
 
 //connect to database
