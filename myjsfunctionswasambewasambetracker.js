@@ -249,7 +249,7 @@ nuid=myObj[i].NodeUID;
  function createTable(){
   var x = document.createElement("TBODY");
       var y = document.createElement("TR");
-   var z1 = document.createElement("TD");
+	   var z1 = document.createElement("TD");
  var z2 = document.createElement("TD");
   var z3 = document.createElement("TD");
    var z4 = document.createElement("TD");
@@ -294,7 +294,7 @@ function addClick() {
      var cell = cells[i];
         // do something on onclick event for cell
      cell.onclick = function () {
-            // Get the row id where the cell exists
+		            // Get the row id where the cell exists
             var rowId = this.parentNode.rowIndex;
 alert(rowId);
 alert(document.getElementById("myTable").rows[1].cells[0].innerHTML);
@@ -307,7 +307,9 @@ alert(idvar);
 }
 
 
-
+function testclick(){
+alert ("This is function testclick");	
+}
  
   
  
