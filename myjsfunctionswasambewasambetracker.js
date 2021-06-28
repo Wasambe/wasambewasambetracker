@@ -234,13 +234,14 @@ nuid=myObj[i].NodeUID;
   createTable();
   document.getElementById("myTable").style.visibility = "visible";
   document.getElementById("clickForDetails").style.visibility = "visible";
-   addClickTable();
+   //addClickTable();
 
  }
  
   }
 
-// var x = document.getElementById("myTable").rows.length;
+ //var x = document.getElementById("myTable").rows.length;
+
 }
 
 
@@ -259,6 +260,7 @@ nuid=myObj[i].NodeUID;
 	 var z8 = document.createElement("TD");
   z1.innerHTML = (id);
  z2.innerHTML = (date);
+ z2.innerHTML = (datestr);
  z3.innerHTML = (name);
  z4.innerHTML = (amountloan);
  z5.innerHTML = (amountpaid);
@@ -464,7 +466,8 @@ pemail.innerHTML = "Email: " + email;                // Insert text
 document.getElementById("myDIV").appendChild(pemail);     // Append <p> to <div> with id="myDIV"
   }
   
-
+var datestr = '';
+var dateobj = '';
 function mySearchLoans() {
 
 runadminSqlJsonLoans();
@@ -496,6 +499,9 @@ searchName = searchName.toUpperCase();
 for (i in myObjLoans) {
 id=myObjLoans[i].id;
   date = myObjLoans[i].date ;
+  dateobj = date;
+  
+  dateconvertfromstrtodate();
   name = myObjLoans[i].name;
   name = name.toUpperCase();
   
@@ -510,12 +516,116 @@ id=myObjLoans[i].id;
   createTable();
   document.getElementById("myTable").style.visibility = "visible";
   document.getElementById("clickForDetails").style.visibility = "visible";
-   addClickTable();
+   //addClickTable();
 
  }
  
   }
 
-// var x = document.getElementById("myTable").rows.length;
+var x = document.getElementById("myTable");
+var mysortcell = (x.rows[0].cells[1].innerHTML);
+var mytablerow1 = document.getElementById("myTable").rows[0];
+
+sorttabledesc();
+
+}
+
+var strvar = '';
+function datetest(){
+	
+	 var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("myTable");
+  switching = true;
+  /*Make a loop that will continue until
+  no switching has been done:*/
+      rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+     
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[1];
+      y = rows[i + 1].getElementsByTagName("TD")[1];
+      //check if the two rows should switch place:
+     console.log(x.innerHTML);
+	 strvar = x.innerHTML;
+	 
+	 
+	}
+}
+
+
+function dateconvertfromstrtodate(){
+	//var date = new Date("2015-03-25");
+	//var date = new Date("01 Jan 2021");
+	var date = new Date(dateobj);
+	
+	console.log (date);
+	var d = date.getDate();
+	//not working var dlen = d.length;
+	if (d < 10) {
+		console.log (d);
+		var dstr = d.toString();
+		dstr = "0" + dstr;
+	}else{
+	var dstr = d.toString();
+	}
+	
+    var m = date.getMonth() + 1; 
+	if (m < 10) {
+		console.log (m);
+		var mstr = m.toString();
+		mstr = "0" + mstr;
+	}else{
+	var mstr = m.toString();
+	}
+	
+    var y = date.getFullYear();
+	var ystr = y.toString();
+  // var n = str.length;
+   var dmy = y + '-' + m + '-' + d;
+ var dmy = dmy.toString();
+// console.log ("Date: ");
+ console.log ("Date: " + dmy);
+ datestr = ystr + "-" + mstr + "-" + dstr;
+ console.log (datestr);
+}
+
+
+
+function sorttabledesc() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("myTable");
+  switching = true;
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[1];
+      y = rows[i + 1].getElementsByTagName("TD")[1];
+      //check if the two rows should switch place:
+      if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+        //if so, mark as a switch and break the loop:
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
 }
 
